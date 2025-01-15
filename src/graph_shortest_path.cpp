@@ -18,7 +18,6 @@ public:
         adjList[u].push_back({v, weight});
         adjList[v].push_back({u, weight}); 
     }
-
     void dijkstra(int start) {
         vector<int> distance(vertices, INT_MAX);
         distance[start] = 0;
