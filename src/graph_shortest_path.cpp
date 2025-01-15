@@ -45,3 +45,24 @@ public:
     }
 };
 
+
+int main() {
+    int vertices, edges;
+    cout << "Enter number of vertices:";
+    cin >> vertices;
+    Graph graph(vertices);
+    cout << "Enter the number of edges:";
+    cin >> edges;
+
+    cout << "Enter edges u,v:";
+    for (int i = 0; i < edges; i++) {
+        int u, v, weight;
+        cin >> u >> v >> weight;
+        graph.addEdge(u, v, weight);
+    }
+    int startVertex;
+    cout << "Enter the starting vertex for Dijkstra's algorithm: ";
+    cin >> startVertex;
+    graph.dijkstra(startVertex);
+    return 0;
+}
