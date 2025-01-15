@@ -5,10 +5,13 @@
 #include <climits>
 
 using namespace std;
+
 class Graph {
+
 private:
     vector<list<pair<int, int>>> adjList; 
-  int vertices;
+    int vertices;
+
 public:
     Graph(int v) : vertices(v), adjList(v) {}
     void addEdge(int u, int v, int weight) {
