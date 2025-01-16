@@ -7,17 +7,18 @@
 using namespace std;
 
 class Graph {
-
 private:
-    vector<list<pair<int, int>>> adjList; 
+    vector<list<pair<int, int>>> adjList;
     int vertices;
 
 public:
     Graph(int v) : vertices(v), adjList(v) {}
+
     void addEdge(int u, int v, int weight) {
         adjList[u].push_back({v, weight});
-        adjList[v].push_back({u, weight}); 
+        adjList[v].push_back({u, weight});
     }
+
     void dijkstra(int start) {
         vector<int> distance(vertices, INT_MAX);
         distance[start] = 0;
@@ -41,30 +42,28 @@ public:
 
         cout << "Shortest distances from vertex " << start << ":\n";
         for (int i = 0; i < vertices; i++) {
-            cout << "Vertex " << i << ": " 
+            cout << "Vertex " << i << ": "
                  << (distance[i] == INT_MAX ? "Infinity" : to_string(distance[i])) << endl;
         }
     }
 };
 
-
 int main() {
     int vertices, edges;
-    cout << "Enter number of vertices:";
-    cin >> vertices;
-    Graph graph(vertices);
-    cout << "Enter the number of edges:";
-    cin >> edges;
+    cin >> vertices >> edges;
 
-    cout << "Enter edges u,v:";
+    Graph graph(vertices);
+
     for (int i = 0; i < edges; i++) {
         int u, v, weight;
         cin >> u >> v >> weight;
         graph.addEdge(u, v, weight);
     }
+
     int startVertex;
-    cout << "Enter the starting vertex for Dijkstra's algorithm: ";
     cin >> startVertex;
+
     graph.dijkstra(startVertex);
+
     return 0;
 }
