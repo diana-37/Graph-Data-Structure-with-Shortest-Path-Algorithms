@@ -30,6 +30,8 @@ public:
             int currentVertex = pq.top().second;
             pq.pop();
 
+            if (currentDistance > distance[currentVertex]) continue;
+
             for (auto &neighbor : adjList[currentVertex]) {
                 int neighborVertex = neighbor.first;
                 int edgeWeight = neighbor.second;
@@ -67,5 +69,3 @@ int main() {
 
     return 0;
 }
-
-
