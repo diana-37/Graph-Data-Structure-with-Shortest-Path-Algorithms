@@ -52,7 +52,24 @@ public:
 
 int main() {
     int vertices, edges;
-    cin >> vertices >> edges;
+  
+
+     // Loop until valid input is entered
+    do {
+        cout << "Enter the number of vertices: ";
+        cin >> vertices;
+        if (vertices <= 0)
+            cout << "Error: Number of vertices must be positive." << endl;
+    } while (vertices <= 0);
+
+    do {
+        cout << "Enter the number of edges: ";
+        cin >> edges;
+        if (edges <= 0)
+            cout << "Error: Number of edges must be positive." << endl;
+    } while (edges <= 0);
+
+    
 
     Graph graph(vertices);
 
