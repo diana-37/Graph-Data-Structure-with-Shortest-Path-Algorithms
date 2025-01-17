@@ -39,6 +39,14 @@ void floydWarshall(const vector<vector<int>> &graph) {
         }
     }
 
+    // Check for negative weight cycles
+for (int i = 0; i < n; i++) {
+    if (dist[i][i] < 0) {
+        cout << "Graph contains a negative weight cycle.\n";
+        return;
+    }
+}
+
     // Output the result
     printMatrix(dist);
 }
