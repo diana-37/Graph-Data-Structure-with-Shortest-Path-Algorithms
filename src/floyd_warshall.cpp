@@ -23,8 +23,17 @@ void printMatrix(const vector<vector<int>> &matrix) {
     }
 }
 
+// Function to validate adjacency matrix input
+void validateInput(vector<vector<int>> &graph, int i, int j, int value) {
+    if (value < 0 && value != INF) {
+        cerr << "Error: Negative weight detected at position (" << i << ", " << j << ").\n";
+        exit(EXIT_FAILURE);
+    }
+    graph[i][j] = value;
+}
+
 // Floyd-Warshall Algorithm
-void floydWarshall(const vector<vector<int>> &graph) {
+vector<vector<int>> floydWarshall(const vector<vector<int>> &graph) {
     int n = graph.size();
     vector<vector<int>> dist = graph; // Copy of the input graph to store distances
 
@@ -39,8 +48,7 @@ void floydWarshall(const vector<vector<int>> &graph) {
         }
     }
 
-    // Output the result
-    printMatrix(dist);
+    return dist; // Return the final distance matrix
 }
 
 int main() {
@@ -48,19 +56,34 @@ int main() {
     cout << "Enter the number of vertices in the graph: ";
     cin >> vertices;
 
+    if (vertices <= 0) {
+        cerr << "Error: The number of vertices must be positive.\n";
+        return EXIT_FAILURE;
+    }
+
     // Initialize the adjacency matrix
     vector<vector<int>> graph(vertices, vector<int>(vertices, INF));
 
     cout << "Enter the graph's adjacency matrix (use " << INF << " for no direct edge):\n";
     for (int i = 0; i < vertices; i++) {
         for (int j = 0; j < vertices; j++) {
-            cin >> graph[i][j];
-            if (i == j) graph[i][j] = 0; // Set distance to itself as 0
+            int value;
+            cin >> value;
+            validateInput(graph, i, j, value);
         }
     }
 
+    // Ensure diagonal values are 0 (distance to self)
+    for (int i = 0; i < vertices; i++) {
+        graph[i][i] = 0;
+    }
+
     cout << "\nProcessing the graph using Floyd-Warshall Algorithm...\n";
-    floydWarshall(graph);
+    vector<vector<int>> result = floydWarshall(graph);
+
+    // Output the result
+    printMatrix(result);
 
     return 0;
 }
+
